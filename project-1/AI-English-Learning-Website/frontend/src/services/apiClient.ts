@@ -2,6 +2,7 @@ import axios from "axios";
 import { mockDatabase, DB_KEYS } from "./mockDatabase";
 
 const isMock = (import.meta.env.VITE_API_MODE ?? "mock") === "mock";
+const enableMockFallback = (import.meta.env.VITE_ENABLE_MOCK_FALLBACK ?? "true") === "true";
 const baseURL = import.meta.env.VITE_API_BASE_URL ?? "http://localhost:8080/api";
 
 const axiosInstance = axios.create({
@@ -187,7 +188,7 @@ export const apiClient = {
     try {
       return await axiosInstance.get(url, config);
     } catch (err: any) {
-      if (err.response) throw err;
+      if (!enableMockFallback || err.response) throw err;
       console.warn("Backend unavailable, falling back to mock:", url);
       return handleMockRequest("GET", url, undefined, config?.params);
     }
@@ -197,7 +198,7 @@ export const apiClient = {
     try {
       return await axiosInstance.post(url, data, config);
     } catch (err: any) {
-      if (err.response) throw err;
+      if (!enableMockFallback || err.response) throw err;
       console.warn("Backend unavailable, falling back to mock:", url);
       return handleMockRequest("POST", url, data, config?.params);
     }
@@ -207,7 +208,7 @@ export const apiClient = {
     try {
       return await axiosInstance.put(url, data, config);
     } catch (err: any) {
-      if (err.response) throw err;
+      if (!enableMockFallback || err.response) throw err;
       console.warn("Backend unavailable, falling back to mock:", url);
       return handleMockRequest("PUT", url, data, config?.params);
     }
@@ -217,7 +218,7 @@ export const apiClient = {
     try {
       return await axiosInstance.delete(url, config);
     } catch (err: any) {
-      if (err.response) throw err;
+      if (!enableMockFallback || err.response) throw err;
       console.warn("Backend unavailable, falling back to mock:", url);
       return handleMockRequest("DELETE", url, undefined, config?.params);
     }
@@ -227,7 +228,7 @@ export const apiClient = {
     try {
       return await axiosInstance.patch(url, data, config);
     } catch (err: any) {
-      if (err.response) throw err;
+      if (!enableMockFallback || err.response) throw err;
       console.warn("Backend unavailable, falling back to mock:", url);
       return handleMockRequest("PATCH", url, data, config?.params);
     }
