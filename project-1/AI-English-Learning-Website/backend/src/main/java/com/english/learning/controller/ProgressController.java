@@ -15,7 +15,7 @@ import java.util.*;
 
 @RestController
 @RequestMapping("/api/progress")
-@CrossOrigin(origins = "*")
+
 @RequiredArgsConstructor
 public class ProgressController {
 

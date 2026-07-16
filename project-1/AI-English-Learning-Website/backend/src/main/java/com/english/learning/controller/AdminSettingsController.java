@@ -9,7 +9,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/admin/settings")
-@CrossOrigin(origins = "*")
+
 @RequiredArgsConstructor
 public class AdminSettingsController {
 

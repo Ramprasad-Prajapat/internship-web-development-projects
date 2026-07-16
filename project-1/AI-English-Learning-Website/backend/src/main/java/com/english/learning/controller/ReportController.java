@@ -18,7 +18,7 @@ import java.time.format.DateTimeFormatter;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "*")
+
 @RequiredArgsConstructor
 public class ReportController {
 

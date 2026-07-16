@@ -12,7 +12,7 @@ import java.util.*;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "*")
+
 @RequiredArgsConstructor
 public class NotebookController {
 

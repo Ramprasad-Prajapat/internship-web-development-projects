@@ -33,7 +33,6 @@ public class AuthService {
         String email = (String) payload.get("email");
         String name = (String) payload.getOrDefault("name", "Learner");
         String rawPassword = (String) payload.getOrDefault("password", "password123");
-        String roleStr = (String) payload.getOrDefault("role", "USER");
         if (email == null || email.isBlank()) {
             throw new IllegalArgumentException("Email is required");
         }
@@ -41,7 +40,6 @@ public class AuthService {
             throw new IllegalArgumentException("Email is already registered");
         }
         Role role = Role.USER;
-        try { role = Role.valueOf(roleStr.toUpperCase()); } catch (Exception ignored) {}
         User user = User.builder()
                 .name(name)
                 .email(email)

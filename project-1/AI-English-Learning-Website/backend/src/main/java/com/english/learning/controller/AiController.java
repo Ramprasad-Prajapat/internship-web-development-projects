@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 
 @RestController
 @RequestMapping("/api/ai")
-@CrossOrigin(origins = "*")
+
 @RequiredArgsConstructor
 public class AiController {
 

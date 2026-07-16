@@ -14,7 +14,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/self-check")
-@CrossOrigin(origins = "*")
+
 @RequiredArgsConstructor
 public class SelfCheckController {
 

@@ -9,6 +9,7 @@ import com.english.learning.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -43,6 +44,18 @@ public class DataSeeder implements ApplicationRunner {
     private final LessonDayRepository lessonDayRepository;
     private final PasswordEncoder passwordEncoder;
 
+    @Value("${seed.admin.enabled:false}")
+    private boolean seedAdminEnabled;
+
+    @Value("${seed.admin.email:}")
+    private String adminEmail;
+
+    @Value("${seed.admin.password:}")
+    private String adminPassword;
+
+    @Value("${seed.admin.name:Admin User}")
+    private String adminName;
+
     @Override
     @Transactional
     public void run(ApplicationArguments args) {
@@ -54,7 +67,15 @@ public class DataSeeder implements ApplicationRunner {
     // ─── Users ────────────────────────────────────────────────────────────────
 
     private void seedUsers() {
-        seedUser("Admin User", "admin@english.com", "Admin123", Role.ADMIN);
+        if (seedAdminEnabled) {
+            if (adminEmail == null || adminEmail.isBlank() || adminPassword == null || adminPassword.isBlank()) {
+                log.warn("[DataSeeder] Admin seeding is enabled but ADMIN_EMAIL or ADMIN_PASSWORD is empty!");
+            } else {
+                seedUser(adminName, adminEmail, adminPassword, Role.ADMIN);
+            }
+        } else {
+            log.info("[DataSeeder] Admin seeding is disabled.");
+        }
         seedUser("Demo Learner", "demo@example.com", "password123", Role.USER);
     }
 

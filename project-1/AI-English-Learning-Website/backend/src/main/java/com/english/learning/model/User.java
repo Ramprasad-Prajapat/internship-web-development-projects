@@ -45,5 +45,8 @@ public class User {
         if (role == null) {
             role = Role.USER;
         }
+        if (enabled == null) {
+            enabled = true;
+        }
     }
 }
