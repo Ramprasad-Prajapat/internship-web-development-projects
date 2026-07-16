@@ -79,3 +79,13 @@
 **/Thumbs.db
 **/Desktop.ini
 **/.DS_Store
+# Project 1: local reports, planning and AI documentation
+/project-1/AI-English-Learning-Website/*.md
+!/project-1/AI-English-Learning-Website/README.md
+
+# Local AI/project instruction files
+**/rule.md
+
+# Project-local backend configuration containing secrets
+**/src/main/resources/application-local.yml
+**/src/main/resources/application-local.properties

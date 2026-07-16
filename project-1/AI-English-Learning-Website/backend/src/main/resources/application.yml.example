@@ -1,0 +1,15 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: ai-english-learning-backend
+  datasource:
+    url: jdbc:mysql://localhost:3306/ai_english?useSSL=false&serverTimezone=UTC
+    username: root
+    password: YOUR_DB_PASSWORD
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+jwt:
+  secret: YOUR_JWT_SECRET_KEY
+  expiration: 86400000

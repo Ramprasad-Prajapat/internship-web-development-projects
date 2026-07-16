@@ -1,0 +1,23 @@
+# Backend API Endpoints
+
+- GET `/api/health`
+- POST `/api/auth/register`
+- POST `/api/auth/login`
+- GET `/api/auth/me`
+- PUT `/api/profile`
+- GET `/api/lessons`
+- GET `/api/lessons/day/{dayNumber}`
+- POST `/api/practice/check`
+- GET `/api/practice/history`
+- GET `/api/notebook`
+- POST `/api/notebook`
+- DELETE `/api/notebook/{id}`
+- GET `/api/mistakes`
+- POST `/api/mistakes`
+- PATCH `/api/mistakes/{id}/fixed`
+- DELETE `/api/mistakes/{id}`
+- GET `/api/reports/summary`
+- GET `/api/reports/history`
+- POST `/api/reports/history`
+- GET `/api/progress`
+- POST `/api/progress`
