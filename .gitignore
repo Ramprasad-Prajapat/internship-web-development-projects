@@ -1,0 +1,81 @@
+# Dependencies
+**/node_modules/
+**/bower_components/
+
+# Frontend build output
+**/dist/
+**/build/
+**/.next/
+**/out/
+**/.vite/
+**/.turbo/
+**/.cache/
+**/.vercel/
+**/coverage/
+
+# Java / Spring Boot / Maven / Gradle
+**/target/
+**/.gradle/
+**/*.class
+
+# Environment variables and secrets
+**/.env
+**/.env.*
+!**/.env.example
+!**/.env.sample
+!**/.env.template
+
+# Local/private Spring configuration
+**/application-local.yml
+**/application-local.yaml
+**/application-local.properties
+**/application-secret.yml
+**/application-secret.yaml
+**/application-secret.properties
+
+# IDE files
+**/.idea/
+**/.vscode/
+**/*.iml
+**/.classpath
+**/.project
+**/.settings/
+
+# Logs
+**/*.log
+**/logs/
+**/npm-debug.log*
+**/yarn-debug.log*
+**/yarn-error.log*
+**/pnpm-debug.log*
+
+# Temporary files
+**/*.tmp
+**/*.temp
+**/*.swp
+**/*.swo
+**/*~
+**/.eslintcache
+
+# Private database backups
+**/*backup*.sql
+**/*private*.sql
+**/*.dump
+**/*.bak
+
+# Android generated files for future projects
+**/*.apk
+**/*.aab
+**/local.properties
+**/.cxx/
+**/captures/
+
+# Test reports
+**/test-results/
+**/playwright-report/
+**/.nyc_output/
+
+# Operating-system files
+**/Thumbs.db
+**/Desktop.ini
+**/.DS_Store
