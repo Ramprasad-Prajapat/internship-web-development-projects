@@ -10,16 +10,18 @@ export default function AdminDashboard() {
     publishedSections: number;
     draftSections: number;
   } | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchStats = async () => {
+      setError(null);
       try {
         const fetched = await adminLessonService.getDashboardStats();
         setStats(fetched);
       } catch (e) {
-        // On error, show zeroed stats to prevent infinite loading
-        setStats({ totalDays: 0, totalSections: 0, publishedSections: 0, draftSections: 0 });
         console.error('Failed to load dashboard stats', e);
+        setStats(null);
+        setError('Failed to load dashboard statistics. Please try again.');
       }
     };
     fetchStats();
@@ -34,20 +36,12 @@ export default function AdminDashboard() {
         <span className="text-indigo-600 font-bold">Dashboard</span>
       </div>
 
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div>
-          <h1 className="text-2xl font-black text-slate-800 flex items-center gap-2">
-            <LayoutDashboard className="text-indigo-600" /> Lesson Content Management
-          </h1>
-          <p className="text-sm font-semibold text-slate-400 mt-1">
-            Manage daily lesson content, headings, section items, and publishing state.
-          </p>
+      {error ? (
+        <div className="h-28 bg-rose-50 border border-rose-200 rounded-2xl flex items-center justify-center text-rose-800 font-semibold text-sm">
+          {error}
         </div>
-      </div>
-
-      {/* Stats Cards */}
-      {stats ? (
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      ) : stats ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           <div className="bg-white border border-slate-200/80 rounded-2xl p-5 shadow-sm flex items-center gap-4">
             <div className="p-3.5 bg-indigo-50 text-indigo-600 rounded-xl">
               <Calendar size={22} />
