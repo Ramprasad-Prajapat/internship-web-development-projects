@@ -38,8 +38,16 @@ export const adminLessonService = {
 
   async getAllDays(): Promise<AdminDaySummary[]> {
     const response: any = await apiClient.get("/admin/days");
-    const data = response.data || [];
-    return data.map((day: any) => {
+    const raw = response.data;
+    let dataArray: any[] = [];
+    if (Array.isArray(raw)) {
+      dataArray = raw;
+    } else if (Array.isArray(raw?.data)) {
+      dataArray = raw.data;
+    } else if (Array.isArray(raw?.content)) {
+      dataArray = raw.content;
+    }
+    return dataArray.map((day: any) => {
       const sections = day.sections || [];
       const published = sections.filter((s: any) => (s.status || "").toLowerCase() !== "draft").length;
       const drafts = sections.filter((s: any) => (s.status || "").toLowerCase() === "draft").length;

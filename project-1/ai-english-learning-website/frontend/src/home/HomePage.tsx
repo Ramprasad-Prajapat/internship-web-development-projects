@@ -16,7 +16,7 @@ import Button from "../components/common/Button";
 import Card from "../components/common/Card";
 
 export default function HomePage() {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, isLoading } = useAuth();
 
   const badges = [
     "Beginner Friendly",
@@ -94,7 +94,7 @@ export default function HomePage() {
           </nav>
 
           <div className="flex items-center gap-3">
-            {isAuthenticated ? (
+            {isLoading ? null : isAuthenticated ? (
               <Link to="/dashboard">
                 <Button size="sm" className="bg-violet-600 hover:bg-violet-700 text-white border-none shadow-md shadow-violet-600/10">Go to Dashboard</Button>
               </Link>
@@ -132,16 +132,22 @@ export default function HomePage() {
           </p>
 
           <div className="flex flex-col items-center justify-center gap-3 sm:flex-row pt-4">
-            <Link to={isAuthenticated ? "/dashboard" : "/register"} className="w-full sm:w-auto">
-              <Button size="lg" className="w-full bg-violet-600 hover:bg-violet-700 text-white border-none shadow-lg shadow-violet-600/20 font-black px-8 py-3.5 rounded-xl transition-all">
-                Start Learning <ArrowRight size={16} className="ml-1" />
-              </Button>
-            </Link>
-            <Link to="/login" className="w-full sm:w-auto">
-              <Button size="lg" variant="outline" className="w-full border-slate-200 text-slate-700 hover:bg-slate-100/50 font-black px-8 py-3.5 rounded-xl transition-all bg-white">
-                Login
-              </Button>
-            </Link>
+            {!isLoading && (
+              <>
+                <Link to={isAuthenticated ? "/dashboard" : "/register"} className="w-full sm:w-auto">
+                  <Button size="lg" className="w-full bg-violet-600 hover:bg-violet-700 text-white border-none shadow-lg shadow-violet-600/20 font-black px-8 py-3.5 rounded-xl transition-all">
+                    Start Learning <ArrowRight size={16} className="ml-1" />
+                  </Button>
+                </Link>
+                {!isAuthenticated && (
+                  <Link to="/login" className="w-full sm:w-auto">
+                    <Button size="lg" variant="outline" className="w-full border-slate-200 text-slate-700 hover:bg-slate-100/50 font-black px-8 py-3.5 rounded-xl transition-all bg-white">
+                      Login
+                    </Button>
+                  </Link>
+                )}
+              </>
+            )}
           </div>
 
           <div className="mx-auto max-w-md rounded-2xl border border-amber-100 bg-amber-50/60 p-3.5 flex items-center gap-2 shadow-sm select-none">

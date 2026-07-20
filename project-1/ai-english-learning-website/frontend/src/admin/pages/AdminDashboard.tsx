@@ -12,7 +12,17 @@ export default function AdminDashboard() {
   } | null>(null);
 
   useEffect(() => {
-    adminLessonService.getDashboardStats().then(setStats);
+    const fetchStats = async () => {
+      try {
+        const fetched = await adminLessonService.getDashboardStats();
+        setStats(fetched);
+      } catch (e) {
+        // On error, show zeroed stats to prevent infinite loading
+        setStats({ totalDays: 0, totalSections: 0, publishedSections: 0, draftSections: 0 });
+        console.error('Failed to load dashboard stats', e);
+      }
+    };
+    fetchStats();
   }, []);
 
   return (
