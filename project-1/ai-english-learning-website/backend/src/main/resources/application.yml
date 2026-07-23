@@ -8,7 +8,7 @@ spring:
   application:
     name: ai-english-learning-backend
   datasource:
-    url: ${DB_URL:jdbc:mysql://localhost:3306/ai_english?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC}
+    url: ${DB_URL:jdbc:mysql://localhost:3306/ai_english?createDatabaseIfNotExist=true}
     username: ${DB_USERNAME:root}
     password: ${DB_PASSWORD:root}
     driver-class-name: ${DB_DRIVER:com.mysql.cj.jdbc.Driver}
