@@ -1,0 +1,25 @@
+# render.yaml - Render service configuration for AI English Learning Backend
+services:
+  - type: web
+    name: ai-english-learning-backend
+    env: docker
+    plan: free
+    # Render will build the Dockerfile in the repository root
+    dockerfilePath: ./backend/Dockerfile
+    # The service will listen on the port provided by Render via $PORT
+    # No explicit start command needed; Dockerfile's ENTRYPOINT runs the app.
+    healthCheckPath: /api/health
+    # Environment variables (add secrets in Render dashboard as needed)
+    envVars:
+      - key: JWT_SECRET
+        sync: false
+        value: placeholder-secret
+      - key: DB_URL
+        sync: false
+        value: jdbc:mysql://localhost:3306/ai_english?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      - key: DB_USERNAME
+        sync: false
+        value: root
+      - key: DB_PASSWORD
+        sync: false
+        value: root
